@@ -15,6 +15,8 @@ from cosyvoice.utils.file_utils import load_wav
 import tempfile
 import base64
 from io import BytesIO
+import torchaudio
+import torch
 
 def generate_data(model_output):
     for i in model_output:
@@ -61,10 +63,24 @@ def handler(event):
             audio_chunks.append(audio_chunk)
 
         # convert the entire audio_chunks to one base64 encoded string
-        audio_chunks = base64.b64encode(b''.join(audio_chunks)).decode('utf-8')
+        audio_data = b''.join(audio_chunks)
+        audio_np = np.frombuffer(audio_data, dtype=np.int16)
+        tts_speech = torch.from_numpy(audio_np).float().unsqueeze(0) / 32768.0  # Normalize to [-1, 1]
+
+        # Save as MP3 in memory
+        mp3_buffer = BytesIO()
+        torchaudio.save(
+            mp3_buffer,
+            tts_speech,
+            sample_rate=24000,  # Adjust sample rate to match your model's output
+            format="mp3"
+        )
+        mp3_buffer.seek(0)
+        mp3_data = base64.b64encode(mp3_buffer.read()).decode('utf-8')
+
         return {
             "status": "success",
-            "audio": audio_chunks
+            "audio": mp3_data
         }
 
     except Exception as e:
