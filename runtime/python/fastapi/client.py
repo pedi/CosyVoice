@@ -60,7 +60,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--host',
                         type=str,
-                        default='0.0.0.0')
+                        default='192.168.1.9')
     parser.add_argument('--port',
                         type=int,
                         default='50000')
@@ -79,7 +79,7 @@ if __name__ == "__main__":
                         default='希望你以后能够做的比我还好呦。')
     parser.add_argument('--prompt_wav',
                         type=str,
-                        default='../../../asset/zero_shot_prompt.wav')
+                        default='../../../asset/trimmed.wav')
     parser.add_argument('--instruct_text',
                         type=str,
                         default='Theo \'Crimson\', is a fiery, passionate rebel leader. \
