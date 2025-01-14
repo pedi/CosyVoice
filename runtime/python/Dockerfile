@@ -1,3 +1,4 @@
+ARG VERSION=2.3
 FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
 ENV DEBIAN_FRONTEND=noninteractive
 
