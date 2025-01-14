@@ -74,5 +74,5 @@ def handler(event):
         }
 
 if __name__ == '__main__':
-    cosyvoice = CosyVoice2('pretrained_models/CosyVoice2-0.5B')
+    cosyvoice = CosyVoice2('CosyVoice/pretrained_models/CosyVoice2-0.5B')
     runpod.serverless.start({'handler': handler})
