@@ -1,0 +1,7 @@
+{
+    "input": {
+        "mode": "sft",
+        "tts_text": "Hello, how are you?",
+        "spk_id": "0"
+    }
+}
